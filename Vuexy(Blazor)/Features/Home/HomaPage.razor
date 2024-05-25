@@ -1,0 +1,59 @@
+﻿@page "/"
+
+<div class="row">
+
+    <div class="col-lg-6 mb-4">
+        <WebSiteAnalytics></WebSiteAnalytics>
+    </div>
+
+    <div class="col-lg-3 col-sm-6 mb-4">
+        <SalesOverview></SalesOverview>
+    </div>
+
+    <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+        <RevenueGenerated></RevenueGenerated>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <EarningReports></EarningReports>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <SupportTracker></SupportTracker>
+    </div>
+
+    <div class="col-xl-4 col-md-6 mb-4">
+        <SalesByCountry></SalesByCountry>
+    </div>
+
+    <div class="col-12 col-xl-4 mb-4 col-md-6">
+        <TotalEarning></TotalEarning>
+    </div>
+
+    <div class="col-xl-4 col-md-6 mb-4">
+        <MonthlyCampaignState></MonthlyCampaignState>
+    </div>
+
+    <div class="col-xl-4 col-md-6 order-2 order-lg-1 mb-4">
+        <SourceVisit></SourceVisit>
+    </div>
+    
+    <div class="col-12 col-xl-8 col-sm-12 order-1 order-lg-2 mb-4 mb-lg-0">
+        <ProjectsTable></ProjectsTable>
+    </div>    
+</div>
+
+
+@code {
+    
+    [Inject]
+    public IJSRuntime _jsRunTime { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+          
+        }
+    }
+}

@@ -1,0 +1,44 @@
+﻿@using Vuexy.Features.Shared.Menu
+<li class="menu-item active @(DashBoard.IsOpen?"open":"")">
+    <a href="javascript:void(0);" @onclick="ToggleSubMenu" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons ti ti-smart-home"></i>
+        <div data-i18n="Dashboards">@DashBoard.Title</div>
+        <div class="badge bg-primary rounded-pill ms-auto"></div>
+    </a>
+    <ul class="menu-sub">
+        @foreach (var menu in DashBoard.SubMenus)
+        {
+            <li class="menu-item">
+                <a @onclick="()=>NavigateTo(menu.Link)" class="menu-link">
+                    <div data-i18n="Analytics">@menu.Title</div>
+                </a>
+            </li>
+        }
+    </ul>
+</li>
+
+@code {
+
+    [Parameter,EditorRequired]
+    public MenuItem DashBoard { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    private void ToggleSubMenu()
+    {        
+        if (DashBoard.IsOpen)
+        {
+            DashBoard.IsOpen = false;
+        }
+        else
+        {
+            DashBoard.IsOpen = true;
+        }
+    }
+
+    public void NavigateTo(string address)
+    {
+        NavigationManager.NavigateTo(address);
+    }
+}

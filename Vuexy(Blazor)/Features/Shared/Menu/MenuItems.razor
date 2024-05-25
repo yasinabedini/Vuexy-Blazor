@@ -1,0 +1,48 @@
+﻿@using Vuexy.Features.Shared.Menu
+@foreach (var menu in Menus.Where(t => t.Id > 1))
+{
+    <li class="menu-item @(menu.IsOpen?"open":"")">
+        <a href="javascript:void(0);" @onclick="()=>ToggleSubMenu(menu.Id)" class="menu-link menu-toggle">
+            <i class="menu-icon tf-icons ti ti-users"></i>
+            <div data-i18n="Users">@menu.Title</div>
+        </a>
+        <ul class="menu-sub">
+            @foreach (var subMenu in menu.SubMenus)
+            {
+                <li class="menu-item">
+                    <a @onclick="()=>NavigateTo(subMenu.Link)" class="menu-link">
+                        <div data-i18n="List">@subMenu.Title</div>
+                    </a>
+                </li>
+            }
+        </ul>
+    </li>
+}
+
+@code {
+
+    [Parameter,EditorRequired]
+    public List<MenuItem> Menus { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    private void ToggleSubMenu(int menuKey)
+    {
+        var menuItem = Menus.FirstOrDefault(t => t.Id == menuKey);
+        if (menuItem.IsOpen)
+        {
+            menuItem.IsOpen = false;
+        }
+        else
+        {
+            menuItem.IsOpen = true;
+        }
+    }
+
+    public void NavigateTo(string address)
+    {
+        NavigationManager.NavigateTo(address);
+    }
+
+}

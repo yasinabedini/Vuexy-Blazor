@@ -1,0 +1,56 @@
+﻿@using Vuexy.Features.Shared.Menu
+
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    
+    <MenuBrand></MenuBrand>
+
+    <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1">
+        <!-- Dashboards -->
+        <DashBoardMenuItem DashBoard="@menus[0]"></DashBoardMenuItem>
+
+
+        <!-- Apps & Pages -->
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text" data-i18n="Apps & Pages">Apps &amp; Pages</span>
+        </li>
+
+        <MenuItems Menus="menus"></MenuItems>
+      
+    </ul>
+</aside>
+
+@code {
+    private List<MenuItem> menus = new List<MenuItem>
+    {
+        new MenuItem
+        {
+            Id = 1,
+            Title = "DashBoards",
+            SubMenus = new List<SubMenuItem>
+            {
+                new SubMenuItem{Title="Analytics",Link="/"}
+            }
+        },
+        new MenuItem
+        {
+            Id = 2,
+            Title = "User",
+            SubMenus = new List<SubMenuItem>
+            {
+                new SubMenuItem{Title="List",Link="/Users"}
+            }
+        },
+          new MenuItem
+        {
+            Id = 3,
+            Title = "Role & Permission",
+            SubMenus = new List<SubMenuItem>
+            {
+                new SubMenuItem{Title="Role",Link="/Roles"},
+                new SubMenuItem{Title="Permission",Link="/Permission"}
+            }
+        }
+    };
+}

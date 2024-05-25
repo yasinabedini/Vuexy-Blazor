@@ -1,6 +1,7 @@
 ﻿@page "/Users"
-
+@using Features.User
 @using Newtonsoft.Json
+@using global::Features.User
 <div class="row g-4 mb-4">
     <div class="col-sm-6 col-xl-3">
         <div class="card">
@@ -108,7 +109,7 @@
                     <th>PhoneNumber</th>
                 </tr>
             </thead>
-
+            <tbody>
             @if (Users is not null)
             {
                 foreach (var user in Users)
@@ -127,6 +128,7 @@
                     <td colspan="4">Loading..</td>
                 </tr>
             }
+            </tbody>
 
 
         </table>
@@ -243,18 +245,41 @@
     </div>
 </div>
 
-@code {    
+@code {
     public HttpClient Client { get; set; }
+
+    [Inject]
+    public IJSRuntime JS { get; set; }
 
     [Inject]
     public IHttpClientFactory Factory { get; set; }
 
-    public List<ViewModels.User> Users { get; set; }
+    public List<UserViewModel> Users { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         Client = Factory.CreateClient("UserManager");
 
-        Users = await Client.GetFromJsonAsync<List<ViewModels.User>>("api/user");
+        var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"{Client.BaseAddress.AbsoluteUri}api/User"),
+                Headers =
+        {
+            { "Accept", "application/json, text/plain, */*" },
+            { "Sec-Fetch-Dest", "empty" },
+            { "Sec-Fetch-Mode", "cors" },
+            { "Sec-Fetch-Site", "same-origin" },
+            { "User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" },
+        },
+            };
+
+        using (var response = await Client.SendAsync(request))
+        {
+            response.EnsureSuccessStatusCode();
+            var body = await response.Content.ReadAsStringAsync();
+            Users = JsonConvert.DeserializeObject<List<UserViewModel>>(body);
+        }
+        
     }
 }

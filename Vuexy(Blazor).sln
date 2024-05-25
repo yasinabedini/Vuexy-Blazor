@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vuexy(Blazor)", "Vuexy(Blazor)\Vuexy(Blazor).csproj", "{F32295C4-8D71-4A14-8766-D081553DDA51}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTest", "ApiTest\ApiTest\ApiTest.csproj", "{15747095-0085-4E67-AFB5-84EEDE5845F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F32295C4-8D71-4A14-8766-D081553DDA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F32295C4-8D71-4A14-8766-D081553DDA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F32295C4-8D71-4A14-8766-D081553DDA51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15747095-0085-4E67-AFB5-84EEDE5845F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15747095-0085-4E67-AFB5-84EEDE5845F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15747095-0085-4E67-AFB5-84EEDE5845F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15747095-0085-4E67-AFB5-84EEDE5845F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

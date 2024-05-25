@@ -43,9 +43,28 @@
 
 @code {
 
-    public void NavigateTo(string address)
-    {
-        _navigationManager.NavigateTo(address);
-    }
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "_framework/blazor.server.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/vendor/libs/jquery/jquery.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/vendor/libs/popper/popper.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/vendor/js/bootstrap.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/vendor/libs/node-waves/node-waves.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/vendor/libs/hammer/hammer.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/vendor/libs/i18n/i18n.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/vendor/libs/typeahead-js/typeahead.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/js/menu.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/vendor/js/menu.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/vendor/libs/apex-charts/apexcharts.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/vendor/js/jquery.min.js");
+            await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/vendor/js/helpers.js");
+        }
+    }
+ 
 }
